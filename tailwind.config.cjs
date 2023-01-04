@@ -8,8 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        game: [
-        '"Press Start 2P"',
+        playfair: [
+        '"Playfair Display"',
         ]
       }
     },

@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "lint": "eslint --max-warnings=0 src",
     "preview": "vite preview"
@@ -28,9 +30,9 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^4.0.0",
     "postcss": "^7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "typescript": "*",
     "vite": "^4.0.0"
   }
 }
