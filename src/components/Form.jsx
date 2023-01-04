@@ -8,7 +8,10 @@ export default function SelectName({submitTva}) {
   const [formState, setFormState] = useState(state)
 
   function errorMessage(event) {
-    if (event.target.validity.patternMismatch) event.target.setCustomValidity('Please insert a valid TVA number (BE + 10 numbers)');
+    console.log(event.target.value);
+    if (event.target.validity.patternMismatch) {
+      event.target.setCustomValidity('Please insert a valid TVA number (BE + 10 numbers)');
+    }
   }
 
   function setTva(event) {
@@ -28,7 +31,7 @@ export default function SelectName({submitTva}) {
         className="flex flex-col justify-center items-center h-1/3 bg-gray-200 p-10 shadow-lg"
         onSubmit={submitResults}
         >
-        <label className="block text-xl font-serif text-gray-900 dark:text-white mb-4">
+        <label className="block text-md sm:text-xl font-serif text-gray-900 dark:text-white mb-4">
           Search for a company by TVA number :
           <input
             type="text"

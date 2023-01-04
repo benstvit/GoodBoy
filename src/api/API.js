@@ -15,7 +15,6 @@ export const getAPI = async (payload) =>{
     url: `${getConfig.url}?number=${payload.userInput}`,
   }).catch((error) => {
     console.log(error.message);
-    console.log(error.response.status)
   });
 
   return {data, status}
