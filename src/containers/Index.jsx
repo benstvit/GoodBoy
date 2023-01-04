@@ -9,7 +9,8 @@ export default function Index() {
   const [companyState, setCompanyState] = useState({})
 
   async function fetchCompany(payload) {
-    await getAPI(payload).then(results => setCompanyState(results));
+    const results = await getAPI(payload);
+    setCompanyState(results);
   }
 
     return (

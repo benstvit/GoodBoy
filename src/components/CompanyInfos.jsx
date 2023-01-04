@@ -3,7 +3,7 @@ export default function CompanyInfos({data}) {
   const language = data.language;
 
   const address = () => {
-    if (!data.addresses[0].street) return <span className='not-italic'>Country: <span>{data.addresses[0].country_code}</span></span>;
+    if (!data.addresses[0].street) return <span className='not-italic'>Country: {data.addresses[0].country_code}</span>;
 
     return data.addresses[0]?.full_address;
   }
@@ -12,7 +12,6 @@ export default function CompanyInfos({data}) {
 
   function activities () {
     const mains = data.activities.filter(activity => activity.classification === 'MAIN');
-    console.log(data);
     return mains.map((activity, index) => {
       return <p key={index}>{activity.label.fr.label}</p>;
     })

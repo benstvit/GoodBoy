@@ -10,9 +10,10 @@ const getConfig = {
 }
 
 export const getAPI = async (payload) =>{
+  const tva = payload.userInput;
   const {data, status} = await axios({
     ...getConfig,
-    url: `${getConfig.url}?number=${payload.userInput}`,
+    url: `${getConfig.url}?number=${tva}`,
   }).catch((error) => {
     console.log(error.message);
   });

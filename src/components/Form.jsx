@@ -3,16 +3,10 @@ import {useState} from 'react'
 export default function SelectName({submitTva}) {
   const state = {
     userInput: 'BE',
+    errorMessage: false
   }
 
   const [formState, setFormState] = useState(state)
-
-  function errorMessage(event) {
-    console.log(event.target.value);
-    if (event.target.validity.patternMismatch) {
-      event.target.setCustomValidity('Please insert a valid TVA number (BE + 10 numbers)');
-    }
-  }
 
   function setTva(event) {
     setFormState({userInput: ''});
@@ -22,6 +16,10 @@ export default function SelectName({submitTva}) {
 
   function submitResults(event) {
     event.preventDefault();
+    const regex = /BE\d{10}/;
+    if (!regex.test(formState.userInput)) return setFormState({...formState, errorMessage: true });
+
+    setFormState({...formState, errorMessage: false })
     submitTva(formState);
   }
 
@@ -33,14 +31,13 @@ export default function SelectName({submitTva}) {
         >
         <label className="block text-md sm:text-xl font-serif text-gray-900 dark:text-white mb-4">
           Search for a company by TVA number :
+          {formState.errorMessage && <p className='text-red-500 text-sm'>Please insert a valid TVA number (BE + 10 numbers)</p>}
           <input
             type="text"
-            pattern="BE\d{10}"
             value={formState.userInput}
             className="bg-gray-50 border border-gray-300 text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent  text-sm text-center font-sans font-bold rounded-sm block w-full p-2.5 my-6"
             placeholder='Insert TVA Number'
             onChange={setTva}
-            onInvalid={errorMessage}
           />
         </label>
         <input
