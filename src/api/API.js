@@ -11,12 +11,31 @@ const getConfig = {
 
 export const getAPI = async (payload) =>{
   const tva = payload.userInput;
+
   const {data, status} = await axios({
     ...getConfig,
     url: `${getConfig.url}?number=${tva}`,
   }).catch((error) => {
-    console.log(error.message);
+    if (error.response) {
+      const status = error.response.status;
+      console.log(error.response.data);
+      console.log(`status: ${status}`);
+      console.log(error.response.headers);
+
+      if (status === 400) {
+        return {
+          data: { errorMessage: error.message },
+          status: status
+        }
+      } else {
+        return {
+          data: { errorMessage: error.message },
+          status: status
+        }
+      }
+    }
+    console.log(error.config);
   });
 
-  return {data, status}
+  return {data, status};
 }

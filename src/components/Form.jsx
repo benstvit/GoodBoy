@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-export default function SelectName({submitTva}) {
+export default function Form({submitTva}) {
   const state = {
     userInput: 'BE',
     errorMessage: false
@@ -16,8 +16,9 @@ export default function SelectName({submitTva}) {
 
   function submitResults(event) {
     event.preventDefault();
-    const regex = /BE\d{10}/;
-    if (!regex.test(formState.userInput)) return setFormState({...formState, errorMessage: true });
+    const formattedInput = formState.userInput.replace(/[ .]+/g, '').replace(/\W+/g, '');
+    const regex = /^(BE)?0[0-9]{9}$/;
+    if (!regex.test(formattedInput)) return setFormState({...formState, errorMessage: true });
 
     setFormState({...formState, errorMessage: false })
     submitTva(formState);
@@ -31,7 +32,7 @@ export default function SelectName({submitTva}) {
         >
         <label className="block text-md sm:text-xl font-serif text-gray-900 dark:text-white mb-4">
           Search for a company by TVA number :
-          {formState.errorMessage && <p className='text-red-500 text-sm'>Please insert a valid TVA number (BE + 10 numbers)</p>}
+          {formState.errorMessage && <p className='text-red-500 text-sm'>Please insert a valid TVA number (BE + 10 digits)</p>}
           <input
             type="text"
             value={formState.userInput}
